@@ -10,8 +10,15 @@ def block_splitter(array)
   #       elements for which the given block yields true,
   #       the second containing all the other elements.
   #       No sort needed this time.
+  array.sort.partition { |element| yield(element) }
 end
 
-words = %w(dog data ask my win two beer as)
+def test_size_splitter
+  words = %w(dog data ask my win two beer as)
+  result = size_splitter(words, 3)
+end
 
-result = size_splitter(words, 3)
+def test_block_splitter
+  beatles = [ "John", "Paul", "Ringo", "George" ]
+  result = block_splitter(beatles) { |beatle| beatle.start_with?("P") }
+end
