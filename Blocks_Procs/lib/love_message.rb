@@ -5,7 +5,7 @@ end
 
 def tell_mum(&message_blk)
   # TODO: return message addressed to your mum
-  tell("mum") {message_blk.call}
+  tell('mum') { message_blk.call }
 end
 
 # Example:
@@ -20,7 +20,7 @@ end
 def tell_mum_with_proc(message_blk)
   # TODO: return message addressed to your mum
   # => Should call #tell_with_proc of course
-  tell_with_proc("mum", message_blk)
+  tell_with_proc('mum', message_blk)
 end
 
 # Example:
