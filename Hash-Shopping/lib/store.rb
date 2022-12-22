@@ -13,7 +13,7 @@ def product_in_store?(product)
 end
 
 def price_of_product(product)
-  store_items[product.to_sym] if product_in_store?(product)
+  store_items[product.to_sym]
 end
 
 def store_items_to_s
