@@ -9,19 +9,19 @@ def generate_grid(grid_size)
 end
 
 #def run_game(attempt, grid, start_time, end_time)
-def run_game(attempt)
+def run_game(attempt, grid)
   # TODO: runs the game and return detailed hash of result (with `:score`, `:message` and `:time` keys)
-  url = "https://wagon-dictionary.herokuapp.com/#{attempt}"
-  puts call_serialized = URI.open(url).read # returns String
-  puts call = JSON.parse(call_serialized) # returns Hash
+  call_found = call_api(attempt)
+  grid_letters = (attempt.chars.uniq - grid.uniq).empty?
 
-  if call["found"] == true &&
   "he given word is not an english one"
   "the given word is not in the grid"
   "the given word has the correct letters but some letters are overused"
-  end
+
 end
 
-def grid_compliant?(word)
-  word.chars.each {}
+def call_api(attempt)
+  url = "https://wagon-dictionary.herokuapp.com/#{attempt}"
+  call_serialized = URI.open(url).read # returns String
+  JSON.parse(call_serialized)["found"]
 end
