@@ -6,6 +6,12 @@ def generate_grid(grid_size)
   # TODO: generate random grid of letter
   grid_size.times { grid << ("a".."z").to_a[rand(0..26)] }
   grid
+
+  # OR Array.new(grid_size) { ('A'..'Z').to_a.sample }
+end
+
+def included?(guess, grid)
+  guess.chars.all? { |letter| guess.count(letter) <= grid.count(letter) }
 end
 
 def run_game(attempt, grid, start_time, end_time)
@@ -13,7 +19,8 @@ def run_game(attempt, grid, start_time, end_time)
   p attempt = attempt.downcase
   p grid = grid.each(&:downcase!)
   p call_found = call_api(attempt)
-  p grid_letters = (attempt.chars.uniq - grid.uniq).empty?
+  #p grid_letters = (attempt.chars.uniq - grid.uniq).empty?
+  p grid_letters = (grid - attempt.chars).count == grid.count - attempt.chars.count
   p grid_letters_dup = attempt.chars.uniq.size != attempt.chars.size
 
   # initialize result hash
@@ -48,7 +55,6 @@ end
 
 def calculate_score(start_time, end_time, word)
   time_ms = (end_time - start_time).round * 60
-
   letters = word.size
   score = (letters * 50 * 100) / time_ms
 end
