@@ -10,39 +10,32 @@ def generate_grid(grid_size)
   # OR Array.new(grid_size) { ('A'..'Z').to_a.sample }
 end
 
-def included?(guess, grid)
-  guess.chars.all? { |letter| guess.count(letter) <= grid.count(letter) }
+def included?(attempt, grid)
+  attempt.chars.all? { |letter| attempt.count(letter) <= grid.count(letter) }
 end
 
 def run_game(attempt, grid, start_time, end_time)
   # TODO: runs the game and return detailed hash of result (with `:score`, `:message` and `:time` keys)
-  p attempt = attempt.downcase
-  p grid = grid.each(&:downcase!)
   p call_found = call_api(attempt)
-  #p grid_letters = (attempt.chars.uniq - grid.uniq).empty?
-  p grid_letters = (grid - attempt.chars).count == grid.count - attempt.chars.count
-  p grid_letters_dup = attempt.chars.uniq.size != attempt.chars.size
+  p attempt
+  p grid = grid.each(&:downcase!)
 
   # initialize result hash
   result = {
     time: end_time - start_time
   }
 
-  # word is in grid and english
-  if call_found
-    if grid_letters && grid_letters_dup
-      result[:score] = calculate_score(start_time, end_time, attempt)
-      result[:message] = "the given word has the correct letters but some letters are overused"
-    elsif grid_letters
+ if included?(attempt, grid)
+    if call_found
       result[:score] = calculate_score(start_time, end_time, attempt)
       result[:message] = "Well Done!"
     else
       result[:score] = 0
-      result[:message] = "the given word is not in the grid"
+      result[:message] = "not an english word"
     end
   else
     result[:score] = 0
-    result[:message] = "not an english word"
+    result[:message] = "not in the grid"
   end
   result
 end
