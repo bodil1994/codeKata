@@ -25,7 +25,7 @@ def run_game(attempt, grid, start_time, end_time)
     time: end_time - start_time
   }
 
- if included?(attempt, grid)
+  if included?(attempt, grid)
     if call_found
       result[:score] = calculate_score(start_time, end_time, attempt)
       result[:message] = "Well Done!"
