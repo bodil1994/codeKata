@@ -5,8 +5,10 @@ def analyze(text)
   puts result = {
     character_count: character_count(text),
     character_count_excluding_spaces: character_count_excluding_spaces(text),
-    line_count: 42,
-    word_count: word_count(text)
+    line_count: line_count(text),
+    word_count: word_count(text),
+    sentence_count: sentence_count(text),
+    paragraph_count: paragraph_count(text)
   }
 
 end
@@ -25,4 +27,8 @@ end
 
 def word_count(text)
   text.scan(/\w+/).count
+end
+
+def sentence_count(text)
+  text.scan(/[.]/).count
 end
