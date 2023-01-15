@@ -20,6 +20,7 @@ def character_count_excluding_spaces(text)
 end
 
 def line_count(text)
+  text.scan(/^/).count
 end
 
 def word_count(text)
