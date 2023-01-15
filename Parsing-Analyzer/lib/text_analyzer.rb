@@ -12,4 +12,5 @@ def character_count(text)
 end
 
 def character_count_excluding_spaces(text)
+  text.gsub(" ","").length
 end
