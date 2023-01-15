@@ -8,7 +8,9 @@ def analyze(text)
     line_count: line_count(text),
     word_count: word_count(text),
     sentence_count: sentence_count(text),
-    paragraph_count: paragraph_count(text)
+    paragraph_count: paragraph_count(text),
+    average_words_per_sentence: average_words_per_sentence(text),
+    average_sentences_per_paragraph: average_sentences_per_paragraph(text)
   }
 
 end
@@ -35,4 +37,8 @@ end
 
 def paragraph_count(text)
   text.scan(/\n\n/).count + 1
+end
+
+def average_words_per_sentence(text)
+  word_count(text) / sentence_count(text)
 end
