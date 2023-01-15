@@ -40,5 +40,9 @@ def paragraph_count(text)
 end
 
 def average_words_per_sentence(text)
-  word_count(text) / sentence_count(text)
+  word_count(text).to_f / sentence_count(text)
+end
+
+def average_sentences_per_paragraph(text)
+  sentence_count(text).to_f / paragraph_count(text)
 end
