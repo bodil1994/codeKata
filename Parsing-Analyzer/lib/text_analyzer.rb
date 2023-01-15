@@ -32,3 +32,7 @@ end
 def sentence_count(text)
   text.scan(/[.]/).count
 end
+
+def paragraph_count(text)
+  text.scan(/\n\n/).count + 1
+end
